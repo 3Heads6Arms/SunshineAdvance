@@ -99,6 +99,10 @@ public class SettingsActivity extends PreferenceActivity
             // For other preferences, set the summary to the value's simple string representation.
             preference.setSummary(stringValue);
         }
+
+        if (key.equals(getString(R.string.pref_location_status_key))) {
+            Utility.resetLocationStatus(this);
+        }
     }
 
     // This gets called before the preference is changed
@@ -112,9 +116,10 @@ public class SettingsActivity extends PreferenceActivity
     // start our synchronization here
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if ( key.equals(getString(R.string.pref_location_key)) ) {
+        if (key.equals(getString(R.string.pref_location_key))) {
+            Utility.resetLocationStatus(this);
             SunshineSyncAdapter.syncImmediately(this);
-        } else if ( key.equals(getString(R.string.pref_units_key)) ) {
+        } else if (key.equals(getString(R.string.pref_units_key))) {
             // units have changed. update lists of weather entries accordingly
             getContentResolver().notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null);
         }
