@@ -303,7 +303,7 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                     break;
                 default:
                     if (!Utility.isConnectedToNetwork(getContext())) {
-                        message = R.string.no_network;
+                        message = R.string.empty_forecast_no_network;
                     }
                     break;
             }
